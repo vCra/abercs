@@ -1,17 +1,35 @@
 {% load scheduletags %}
 {% ifnotequal day.start.month month.start.month %}
-  <td class="muted"></td>
+  {% comment %}
+  The day is not actually in the month, therefore we should grey it out, and not show any of the events
+  {% endcomment %}
+  <div
+    class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted">
+    <h5 class="row align-items-center">
+      <span class="date col-1">{{ day.start.day }}</span>
+      <span class="col-1"></span>
+    </h5>
+    <p class="d-sm-none">No events</p>
+  </div>
 {% else %}
-  {% if day.has_occurrences %}
-    <td class="btn-primary gradient">
-  {% else %}
-    <td>
-  {% endif %}
-  <a href="{% url "day_calendar" calendar.slug %}{% querystring_for_date day.start 3 %}">
-    <strong>{{day.start.day}}</strong>
-  </a>
-  {% ifnotequal size "small" %}
-    {% include "schedule/_day_cell_big.html" %}
-  {% endifnotequal %}
-</td>
+
+  <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
+    <h5 class="row align-items-center">
+      <span class="date col-1">{{ day.start.day }}</span>
+      <small class="col d-sm-none text-center text-muted">Thursday</small>
+      <span class="col-1"></span>
+    </h5>
+    {% if day.has_occurrences %}
+      {% for o in day.get_occurrence_partials %}
+        <button class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-info text-white"
+           title="{% ifequal o.class 0 %}{{ o.occurrence.start|time:"G:i" }}{% endifequal %}{% ifequal o.class 1 %}{{ o.occurrence.start|time:"G:i" }}{% endifequal %}{% ifequal o.class 2 %}(All day){% endifequal %}{% ifequal o.class 3 %}Ends at {{ o.occurrence.end|time:"G:i" }}{% endifequal %}"
+        >{{ o.occurrence.title }}</button>
+        <p>{{ o.occurrence.color_event }}</p>
+      {% endfor %}
+    {% else %}
+      <p class="d-sm-none">No events</p>
+    {% endif %}
+
+  </div>
 {% endifnotequal %}
+

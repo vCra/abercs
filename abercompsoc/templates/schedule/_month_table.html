@@ -1,25 +1,20 @@
 {% load scheduletags %}
-<table class="table-condensed table-striped">
+
 {% if day_names %}
-<thead>
-  <th>&nbsp;</th>
-  {% for day_name in day_names %}
-    <th>{{ day_name }}</th>
-  {% endfor %}
-</thead>
+  <div class="row d-none d-sm-flex p-1 bg-dark text-white">
+    <h5 class="col-sm p-1 text-center">Monday</h5>
+    <h5 class="col-sm p-1 text-center">Tuesday</h5>
+    <h5 class="col-sm p-1 text-center">Wednesday</h5>
+    <h5 class="col-sm p-1 text-center">Thursday</h5>
+    <h5 class="col-sm p-1 text-center">Friday</h5>
+    <h5 class="col-sm p-1 text-center">Saturday</h5>
+    <h5 class="col-sm p-1 text-center">Sunday</h5>
+  </div>
 {% endif %}
-<tbody>
-  {% for week in month.get_weeks %}
-      <tr>
-      <td>
-          <a href="{% url "week_calendar" calendar.slug %}{% querystring_for_date week.start 3 %}">
-              {{week.start|date:"W"}}
-          </a>
-      </td>
-      {% for day in week.get_days %}
-    {% day_cell calendar day month size %}
-      {% endfor %}
-      </tr>
-  {% endfor %}
-</tbody>
-</table>
+{% for week in month.get_weeks %}
+  <div class="row border border-right-0 border-bottom-0">
+    {% for day in week.get_days %}
+      {% day_cell calendar day month size %}
+    {% endfor %}
+  </div>
+{% endfor %}

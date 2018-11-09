@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-3">{% block title %}{% trans "Welcome to AberCompSoc" %}{% endblock title %}</h1>
+        <p class="lead">AberCompSoc is the society for anyone and everyone interested in computer science, and all things related!</p>
+        <hr class="my-2">
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="https://www.abersu.co.uk/society/abercompsoc/" role="button">Sign up Here &nbsp<i
+            class="fa fa-external-link-alt"></i></a>
+          <a class="btn btn-primary btn-lg" href="{% url "account_signup" %}" role="button">Join our website</a>
+        </p>
+      </div>
+    </div>
+
+
+{% endblock content %}

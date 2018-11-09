@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+  <h2>{% block title %}{% trans "Newsletter" %}{% endblock title %}</h2>
+  {% block body %}
+  {% endblock body %}
+{% endblock content %}

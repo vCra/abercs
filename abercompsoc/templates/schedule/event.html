@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n scheduletags %}
 
-{% block body %}
+{% block content %}
 <div class="navigation">
   <a class="btn btn-primary gradient" href="{% url "day_calendar" event.calendar.slug %}{% querystring_for_date event.start 3 %}">
     {% trans "Day" %}
@@ -29,7 +29,7 @@
    {% trans "Delete" %} <span class="glyphicon glyphicon-remove"></span>
   </a>
 </div>
-<h2 align="center">{{event.title}}</h2>
+<h2 align="center">{% block title %}{{event.title}}{% endblock %}</h2>
 <table align="center" class="table table-hover">
 <tr>
 <td>{% trans "Starts" %}</td>

@@ -2,9 +2,9 @@
 {% load i18n %}
 
 
-{% block body %}
+{% block content %}
 
-<h1>{% trans "Calendar metadata" %}</h1>
+{% block title %}<h1>{% trans "Calendar Data" %}</h1>{% endblock %}
 
 <p>{% trans "Name:" %} {{calendar_name}} </p>
 <p>{% trans "Slug:" %} {{calendar_slug}} </p>
