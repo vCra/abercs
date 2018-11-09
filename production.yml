@@ -4,6 +4,7 @@ volumes:
   production_postgres_data: {}
   production_postgres_data_backups: {}
   production_caddy: {}
+  production_static: {}
 
 services:
   django:
@@ -14,10 +15,13 @@ services:
     depends_on:
       - postgres
       - redis
+    volumes:
+      - production_static:/static
     env_file:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
     command: /start
+
 
   postgres:
     build:
@@ -39,6 +43,7 @@ services:
       - django
     volumes:
       - production_caddy:/root/.caddy
+      - production_static:/static
     env_file:
       - ./.envs/.production/.caddy
     ports:
@@ -46,4 +51,4 @@ services:
       - "0.0.0.0:443:443"
 
   redis:
-    image: redis:3.2
+    image: redis
