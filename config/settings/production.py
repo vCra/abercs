@@ -63,15 +63,26 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [  # noqa F405
 
 # EMAIL
 # ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
-DEFAULT_FROM_EMAIL = env(
-    'DJANGO_DEFAULT_FROM_EMAIL',
-    default='AberCompSoc <noreply@abercompsoc.com>'
-)
 # https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
 EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[AberCompSoc]')
+
+MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = env('DJANGO_SMTP_HOSTNAME', default='smtp.office365.com')
+EMAIL_PORT = env('DJANGO_SMTP_POST', default=587)
+EMAIL_HOST_USER = env('DJANGO_SMTP_USER', "scty14@aber.ac.uk")
+EMAIL_HOST_PASSWORD = env('DJANGO_SMTP_USER')
+
+EMAIL_USE_TLS = True
+
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
+DEFAULT_FROM_EMAIL = env(
+    'DJANGO_DEFAULT_FROM_EMAIL',
+    default=EMAIL_HOST_USER
+)
 
 
 # Gunicorn
