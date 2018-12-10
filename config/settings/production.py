@@ -127,6 +127,16 @@ LOGGING = {
 }
 
 
+# Sentry Support
+
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn="https://7aee89c6e0aa4a1494ed05df85cb7b01@sentry.io/1341367",
+    integrations=[DjangoIntegration()]
+)
+
 # Your stuff...
 # ------------------------------------------------------------------------------
 import django_heroku
