@@ -71,7 +71,7 @@ MAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = env('DJANGO_SMTP_HOSTNAME', default='smtp.office365.com')
 EMAIL_PORT = env('DJANGO_SMTP_POST', default=587)
-EMAIL_HOST_USER = env('DJANGO_SMTP_USER', "scty14@aber.ac.uk")
+EMAIL_HOST_USER = env('DJANGO_SMTP_USER')
 EMAIL_HOST_PASSWORD = env('DJANGO_SMTP_PASSWORD')
 
 EMAIL_USE_TLS = True
