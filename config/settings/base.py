@@ -6,6 +6,7 @@ import environ
 
 ROOT_DIR = environ.Path(__file__) - 3  # (abercompsoc/config/settings/base.py - 3 = abercompsoc/)
 APPS_DIR = ROOT_DIR.path('abercompsoc')
+BASE_DIR = ROOT_DIR
 
 env = environ.Env()
 
