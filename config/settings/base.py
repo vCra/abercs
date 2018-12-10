@@ -68,8 +68,7 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
-    'schedule',
-    'newsletter'
+    'schedule'
 ]
 LOCAL_APPS = [
     'abercompsoc.users.apps.UsersAppConfig',
