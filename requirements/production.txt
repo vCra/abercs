@@ -9,10 +9,10 @@ Collectfast==0.6.2  # https://github.com/antonagestam/collectfast
 # Django
 # ------------------------------------------------------------------------------
 django-storages[boto3]==1.7.1  # https://github.com/jschneier/django-storages
-django-anymail[mailgun]==4.3  # https://github.com/anymail/django-anymail
+django-anymail[mailgun]==5.0  # https://github.com/anymail/django-anymail
 
 # For running on heroku
 # ------------------------------------------------------------------------------
-django-heroku # https://github.com/heroku/django-heroku
+django-heroku==0.3.1 # https://github.com/heroku/django-heroku
 
-sentry-sdk
+sentry-sdk==0.6.2
