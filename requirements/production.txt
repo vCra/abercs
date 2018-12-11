@@ -13,6 +13,6 @@ django-anymail[mailgun]==5.0  # https://github.com/anymail/django-anymail
 
 # For running on heroku
 # ------------------------------------------------------------------------------
-django-heroku # https://github.com/heroku/django-heroku
+django-heroku==0.3.1 # https://github.com/heroku/django-heroku
 
 sentry-sdk
