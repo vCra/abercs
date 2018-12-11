@@ -6,7 +6,6 @@
 // Plugins
 var gulp = require('gulp'),
       pjson = require('./package.json'),
-      gutil = require('gulp-util'),
       sass = require('gulp-sass'),
       autoprefixer = require('gulp-autoprefixer'),
       cssnano = require('gulp-cssnano'),
@@ -14,13 +13,10 @@ var gulp = require('gulp'),
       concat = require('gulp-concat'),
       
       rename = require('gulp-rename'),
-      del = require('del'),
       plumber = require('gulp-plumber'),
       pixrem = require('gulp-pixrem'),
       uglify = require('gulp-uglify'),
       imagemin = require('gulp-imagemin'),
-      spawn = require('child_process').spawn,
-      runSequence = require('run-sequence'),
       browserSync = require('browser-sync').create(),
       reload = browserSync.reload;
 
@@ -117,15 +113,13 @@ gulp.task('browserSync', function() {
 
 // Watch
 gulp.task('watch', function() {
-
-  gulp.watch(paths.sass + '/*.scss', ['styles']);
-  gulp.watch(paths.js + '/*.js', ['scripts']).on("change", reload);
-  gulp.watch(paths.images + '/*', ['imgCompression']);
-  gulp.watch(paths.templates + '/**/*.html').on("change", reload);
-
+    gulp.watch(paths.sass + '/*.scss', gulp.series('styles'));
+    gulp.watch(paths.js + '/*.js', gulp.series('scripts')).on("change", reload);
+    gulp.watch(paths.images + '/*', gulp.series('imgCompression'));
+    gulp.watch(paths.templates + '/**/*.html').on("change", reload);
 });
 
 // Default task
-gulp.task('default', function() {
-    runSequence(['styles', 'scripts', 'vendor-scripts', 'imgCompression'], ['browserSync', 'watch']);
-});
+gulp.task('default',
+    gulp.series(gulp.parallel('styles', 'scripts', 'vendor-scripts', 'imgCompression'), gulp.parallel('browserSync', 'watch'))
+);
