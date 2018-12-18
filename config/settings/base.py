@@ -69,10 +69,11 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     'rest_framework',
-    'schedule'
+    'schedule',
 ]
 LOCAL_APPS = [
     'abercompsoc.users.apps.UsersAppConfig',
+    'abercompsoc.voting'
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
