@@ -59,7 +59,7 @@ DJANGO_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.humanize', # Handy template tags
+    'django.contrib.humanize',  # Handy template tags
     'django.contrib.admin',
 ]
 THIRD_PARTY_APPS = [
@@ -69,10 +69,14 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     'rest_framework',
-    'schedule'
+    'django_tables2',
+    'markdownx'
 ]
 LOCAL_APPS = [
     'abercompsoc.users.apps.UsersAppConfig',
+    'abercompsoc.contrib.tools',
+    'abercompsoc.voting',
+    'abercompsoc.events',
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -199,6 +203,9 @@ TEMPLATES = [
 ]
 # http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+DJANGO_TABLES2_TEMPLATE = 'django_tables2/bootstrap4.html'
+
 
 # FIXTURES
 # ------------------------------------------------------------------------------

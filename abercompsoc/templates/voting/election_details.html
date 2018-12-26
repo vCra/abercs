@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load render_table from django_tables2 %}
+{% load markdown %}
+{% block content %}
+  <section class="row">
+    <div class="col">
+      <h2>{% block title %}{{ object.title }}{% endblock title %}</h2>
+    </div>
+    <div class="col">
+      <div class="btn-group float-right mt-2" role="group">
+        <a class="btn btn-secondary btn-md" href="{% url 'voting:election_lst' %}">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i> All Elections
+        </a>
+        <a class="btn btn-secondary btn-md" href="{% url 'voting:election_option_update' object.pk %}">
+          <i class="fa fa-plus" aria-hidden="true"></i> Run in this Election
+        </a>
+      </div>
+    </div>
+  </section>
+  <div class="row">
+  <div class="col-md-7">
+    <h4>Description:</h4>
+    {{ object.description | markdown }}
+  </div>
+  <div class="col-md-5">
+    {% render_table table  %}
+  </div>
+  </div>
+
+{% endblock content %}
