@@ -100,7 +100,11 @@
     {% block javascript %}
       
       <!-- Vendor dependencies bundled as one file-->
-      
+      <script src="https://browser.sentry-cdn.com/4.4.2/bundle.min.js" crossorigin="anonymous"></script>
+      <script>
+        Sentry.init({ dsn: 'https://e85beacf31b148778a97fa6ca70531ca@sentry.io/1360494' });
+      </script>
+
       <script src="{% static 'js/vendors.js' %}"></script>
       
       
