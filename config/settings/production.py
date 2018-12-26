@@ -134,13 +134,13 @@ LOGGING = {
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['console'],
             'level': 'ERROR',
             'propagate': True
         },
         'django.security.DisallowedHost': {
             'level': 'ERROR',
-            'handlers': ['console', 'mail_admins'],
+            'handlers': ['console'],
             'propagate': True
         }
     }
@@ -153,11 +153,16 @@ import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
 sentry_sdk.init(
-    dsn="https://7aee89c6e0aa4a1494ed05df85cb7b01@sentry.io/1341367",
-    integrations=[DjangoIntegration()]
+    dsn=env("SENTRY_DSN"),
+    integrations=[DjangoIntegration()],
+    release=f"{env('HEROKU_APP_NAME')}@{env('HEROKU_SLUG_COMMIT')}"
 )
+
+# Heroku
+
+import django_heroku
+django_heroku.settings(locals())
+
 
 # Your stuff...
 # ------------------------------------------------------------------------------
-import django_heroku
-django_heroku.settings(locals())
