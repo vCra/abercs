@@ -19,17 +19,20 @@ urlpatterns = [
         "users/",
         include("abercompsoc.users.urls", namespace="users"),
     ),
-    path(
-        "events/",
-        include("schedule.urls")
-    ),
 
     path(
         "accounts/",
         include("allauth.urls")
     ),
+    path(
+        "voting/",
+        include("abercompsoc.voting.urls", namespace="voting")
+    ),
 
-    # Your stuff: custom urls includes go here
+    path("markdownx/", include('markdownx.urls')),
+
+
+                  # Your stuff: custom urls includes go here
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )

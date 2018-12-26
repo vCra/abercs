@@ -18,6 +18,17 @@
 // bootstrap alert CSS, translated to the django-standard levels of
 // debug, info, success, warning, error
 
+.alert-debug {
+  background-color: $white;
+  border-color: $white;
+  color: $black;
+}
+
+.alert-error {
+  background-color: $red;
+  border-color: $red;
+  color: $red;
+}
 
 // Alerts
 
@@ -33,8 +44,6 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic"
 $fa-font-path:  "../fonts/font_awesome/";
 @import "font_awesome/fontawesome.scss";
 @import "font_awesome/solid.scss";
-
-
 
 // Navbar ======================================================================
 
