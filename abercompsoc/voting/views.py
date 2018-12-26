@@ -32,7 +32,7 @@ class UserElectionDetails(SingleTableMixin, DetailView):
         return self.get_object().userelectionoption_set.all()
 
 
-class UserElectionOptionUpdate(SuccessMessageMixin, UpdateView):
+class UserElectionOptionUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = UserElectionOption
     template_name = "voting/option_details.html"
     fields = ["manifesto"]
