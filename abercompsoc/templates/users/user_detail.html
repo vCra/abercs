@@ -4,30 +4,30 @@
 {% block title %}User: {{ object.username }}{% endblock %}
 
 {% block content %}
-<div class="container">
+<section class="container">
 
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-9">
 
-      <h2>Hello {{ object.username }}</h2>
+      <h2>Profile: {{ object.get_full_name }}</h2>
+
+      {% for role in object.roles.all %}
+        <span class="badge badge-pill badge-secondary">{{ role }}</span>
+      {% endfor %}
+
+      {% for group in object.groups.all %}
+        <span class="badge badge-pill badge-dark">{{ group }}</span>
+      {% endfor %}
     </div>
+
+    {% if object == request.user %}
+      <div class="col-md-2">
+        <div class="btn-group float-right mt-2 mb-6">
+          <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
+          <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
+        </div>
+      </div>
+    {% endif %}
   </div>
-
-{% if object == request.user %}
-<!-- Action buttons -->
-<div class="row">
-
-  <div class="col-sm-12">
-    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
-    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
-    <!-- Your Stuff: Custom user template urls -->
-  </div>
-
-</div>
-<!-- End Action buttons -->
-{% endif %}
-
-
-</div>
+</section>
 {% endblock content %}
-
