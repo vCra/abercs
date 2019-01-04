@@ -1,7 +1,11 @@
 
 @import "custom_bootstrap_vars";
 @import "bootstrap";
+$fa-font-path:  "../fonts/font_awesome/";
+@import "font_awesome/fontawesome.scss";
+@import "font_awesome/brands.scss";
 
+@import "bootstrap_social/bs_social";
 
 // project specific CSS goes here
 
@@ -41,9 +45,7 @@
 $web-font-path: "https://fonts.googleapis.com/css?family=Lato:400,700,400italic" !default;
 @import url($web-font-path);
 
-$fa-font-path:  "../fonts/font_awesome/";
-@import "font_awesome/fontawesome.scss";
-@import "font_awesome/solid.scss";
+
 
 // Navbar ======================================================================
 
