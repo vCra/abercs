@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2>{% block title %}Do you really want to delete?{% endblock %}</h2>
+  <h2>{% block title %}Do you really want to delete your manifesto?{% endblock %}</h2>
 
   <form method="post">
-    <p>If you delete, then the people who have voted for you will loose their vote, and will be unable to vote for anyone else.</p>
+    <p>If you delete your manifesto, then the people who have voted for you will lose their vote, and will be unable to vote for anyone else.</p>
     {% csrf_token %}
     <input class="btn btn-danger" type="submit" value="Delete">
   </form>

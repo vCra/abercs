@@ -18,6 +18,9 @@ class User(AbstractUser):
             return self.get_full_name()
         return super(User, self).__str__()
 
+    def is_aber_student(self):
+        return self.emailaddress_set.filter(verified=True, email__endswith="@aber.ac.uk").exists()
+
 
 class Role(Model):
     name = CharField("Role Name", max_length=255)

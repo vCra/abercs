@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
-from django.views.generic import DetailView, ListView, RedirectView, UpdateView
+from django.views.generic import DetailView, ListView, RedirectView, UpdateView, DeleteView
 
 User = get_user_model()
 
@@ -25,6 +25,20 @@ class UserListView(LoginRequiredMixin, ListView):
 
 
 user_list_view = UserListView.as_view()
+
+
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+
+    model = User
+
+    def get_success_url(self):
+        return reverse("home")
+
+    def get_object(self):
+        return User.objects.get(username=self.request.user.username)
+
+
+user_delete_view = UserDeleteView.as_view()
 
 
 class UserUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):

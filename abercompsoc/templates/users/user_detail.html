@@ -25,9 +25,22 @@
         <div class="btn-group float-right mt-2 mb-6">
           <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
           <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
+          <div class="dropdown">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-cog"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item bg-danger" href="{% url "users:delete" %}">Delete Account</a>
+            </div>
+          </div>
         </div>
       </div>
     {% endif %}
   </div>
-</section>
+  </section>
+  <section>
+    <div class="col-md-3 float-right">
+
+    </div>
+  </section>
 {% endblock content %}
