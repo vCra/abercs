@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% load markdown %}
+{% block content %}
+<h1>{% block title %}{{ object.title }}{% endblock title %}</h1>
+  {{ object.body | markdown }}
+{% endblock %}

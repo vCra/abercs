@@ -23,6 +23,7 @@ class Election(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     voters = models.ManyToManyField(User, blank=True)
     open_time = DateTimeRangeField()
+    aber_only = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse("voting:election_details", kwargs={"election_id": self.id})
@@ -31,6 +32,9 @@ class Election(models.Model):
         return self.title
 
     def is_open(self):
+        """
+        Is this election currently open (as in, can users vote in it right now)
+        """
         return pytz.utc.localize(datetime.datetime.now()) in self.open_time
 
     def can_vote(self, user):
@@ -39,7 +43,10 @@ class Election(models.Model):
         :param user: The user to check has voted
         :return: True if the user can vote
         """
-        return self.is_open() and user not in self.voters
+        return self.is_open() \
+            and user not in self.voters \
+            and user.is_aber_student() if self.aber_only else True
+
 
 
 class ElectionOption(models.Model):

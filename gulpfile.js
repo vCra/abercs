@@ -17,7 +17,6 @@ var gulp = require('gulp'),
       browserSync = require('browser-sync').create(),
       reload = browserSync.reload;
 
-
 // Relative paths function
 var pathsConfig = function (appName) {
   this.app = "./" + (appName || pjson.name);

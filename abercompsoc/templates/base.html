@@ -59,6 +59,12 @@
             <li class="nav-item {% if namespace == 'voting' %}active{% endif %}">
               <a class="nav-link" href="{% url 'voting:election_lst' %}">Elections</a>
             </li>
+            <li class="nav-item {% if namespace == 'events' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'events:event_list' %}">Events</a>
+            </li>
+            <li class="nav-item {% if namespace == 'blog' %}active{% endif %}">
+              <a class="nav-link" href="{% url 'blog:blog_list' %}">News</a>
+            </li>
 
             {% if request.user.is_authenticated %}
               <li class="nav-item">

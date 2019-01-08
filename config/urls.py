@@ -28,6 +28,14 @@ urlpatterns = [
         "voting/",
         include("abercompsoc.voting.urls", namespace="voting")
     ),
+    path(
+        "events/",
+        include("abercompsoc.events.urls", namespace="events")
+    ),
+    path(
+        "blog/",
+        include("abercompsoc.blog.urls", namespace="blog")
+    ),
 
     path("markdownx/", include('markdownx.urls')),
 
