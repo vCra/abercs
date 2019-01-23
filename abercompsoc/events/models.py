@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.postgres.fields import DateTimeRangeField
 from django.db.models import Model, CharField, ManyToManyField, ForeignKey, CASCADE, IntegerField, TextField, \
     DateTimeField
+from django.urls import reverse
 
 User = get_user_model()
 
@@ -16,6 +17,12 @@ class Event(Model):
     max_attendees = IntegerField(null=True)
     description = TextField()
     created = DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.event_name
+
+    def get_absolute_url(self):
+        return reverse("events:event_detail", kwargs={"event_id": self.id})
 
 
 class EventTiming(Model):

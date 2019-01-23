@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}User: {{ object.username }}{% endblock %}
+
 
 {% block content %}
 <section class="container">
@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-md-9">
 
-      <h2>Profile: {{ object.get_full_name }}</h2>
+      <h2 class="">{% block title %}{{ object.username }}'s Profile{% endblock %}</h2>
 
       {% for role in object.roles.all %}
         <span class="badge badge-pill badge-secondary">{{ role }}</span>
@@ -21,7 +21,7 @@
     </div>
 
     {% if object == request.user %}
-      <div class="col-md-2">
+      <div class="col-md-3">
         <div class="btn-group float-right mt-2 mb-6">
           <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
           <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
@@ -29,7 +29,7 @@
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-cog"></i>
             </button>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu dropdown-menu-right">
               <a class="dropdown-item bg-danger" href="{% url "users:delete" %}">Delete Account</a>
             </div>
           </div>
@@ -39,8 +39,27 @@
   </div>
   </section>
   <section>
-    <div class="col-md-3 float-right">
+    <div class="col-md-4 float-right">
+      <h4>Info</h4>
+      <dl class="row">
+        <dt class="col-10">
+          <a title="Are you an Aberystwyth Student?" data-toggle="popover" data-trigger="hover" data-content="Some features of this site, such as voting in elections, require you to verify that you are an Aberystwyth Student. To do this, ensure that you have an email address ending in @aber.ac.uk linked to your profile, and that it has been verified.">
+            Aberystwyth Student?
+          </a></dt>
+        <dd class="col-2">
+          {% if object.is_aber_student %}<i class="fa fa-check"></i> {% else %}<i class="fa fa-times"></i>{% endif %}
 
+        </dd>
+      </dl>
     </div>
   </section>
 {% endblock content %}
+{% block javascript %}
+{{ block.super }}
+<script>
+  $(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+  });
+</script>
+{% endblock %}
+

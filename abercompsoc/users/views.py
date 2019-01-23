@@ -46,7 +46,7 @@ class UserUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = User
     fields = ["first_name", "last_name"]
     success_message = "Your profile has been updated!"
-
+    
     def get_success_url(self):
         return reverse("users:detail", kwargs={"username": self.request.user.username})
 

@@ -66,15 +66,28 @@ class UserElectionOptionVote(LoginRequiredMixin, View):
         election = get_object_or_404(Election, id=election_id)
         
         # Check if the user has voted in this election
-        if self.request.user.election_set.filter(id=election_id).exists():
-            messages.add_message(self.request, messages.ERROR, 'You have already voted in this election.')
-        elif not election.is_open():
-            messages.add_message(self.request, messages.ERROR, 'The selected election is currently not open ')
-        else:
+        if election.can_vote(self.request.user):
             self.vote_for_election_option(election, option)
+        else:
+            if self.request.user.election_set.filter(id=election_id).exists():
+                messages.add_message(self.request, messages.ERROR, 'You have already voted in this election.')
+            elif not election.is_open():
+                messages.add_message(self.request, messages.ERROR, 'The selected election is currently not open ')
+            elif not self.request.user.is_aber_student() and election.aber_only:
+                messages.add_message(self.request, messages.ERROR, 'This election requires you to have a verified '
+                                                                   '@aber.ac.uk email address')
+            else:  # If we reach this point, then you should look for any extra variables added in election.can_vote
+                messages.add_message(self.request, messages.ERROR, 'Something Happened!')
+                from sentry_sdk import capture_message
+                capture_message("A user could not vote, but we couldn't work out why", level="Error")
         return redirect(election.get_absolute_url())
 
     def vote_for_election_option(self, election, option):
+        """
+        Vote for Allows a user to vote for an election option, without checking if its valid beforehand
+        :param election: The election to vote in
+        :param option: The option to vote for
+        """
         election.voters.add(self.request.user)
         option.votes = option.votes + 1
         messages.add_message(self.request, messages.SUCCESS, 'Your vote has been placed.')

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load markdown %}
+{% load render_table from django_tables2 %}
+{% block content %}
+  <h1>{% block title %}{{ object }}{% endblock title %}</h1>
+  <div class="col-md-9">
+    {{ object.description | markdown }}
+  </div>
+{% endblock content %}
